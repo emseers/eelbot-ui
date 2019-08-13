@@ -4,7 +4,7 @@ from flask import (
     Blueprint, flash, g, request, session, url_for, jsonify, abort
 )
 
-from eelbotr.db import get_db, query_db
+from backend.db import get_db, query_db
 
 # this is the joke blueprint, define endpoints for jokes here
 bp = Blueprint('joke', __name__, url_prefix='/joke')
