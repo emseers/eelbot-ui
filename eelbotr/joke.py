@@ -7,7 +7,6 @@ from flask import (
 from eelbotr.db import get_db, query_db
 
 # this is the joke blueprint, define endpoints for jokes here
-
 bp = Blueprint('joke', __name__, url_prefix='/joke')
 
 # view/endpoint for requesting all jokes
@@ -25,4 +24,10 @@ def jokes():
 
     return jsonify(all_jokes)
 
-# add other joke endpoints here
+# view/endpoint for deleting a joke
+@bp.route('/delete/<int:id>')
+def delete(id):
+    db = get_db()
+    db.execute('DELETE FROM EelJokes WHERE JokeID = ?', (id,))
+    db.commit()
+    return redirect('/')
