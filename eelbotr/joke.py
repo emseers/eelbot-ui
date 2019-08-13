@@ -1,7 +1,7 @@
 import functools
 
 from flask import (
-    Blueprint, flash, g, redirect, request, session, url_for, jsonify, abort
+    Blueprint, flash, g, request, session, url_for, jsonify, abort
 )
 
 from eelbotr.db import get_db, query_db
@@ -15,16 +15,20 @@ def jokes():
     db = get_db()
 
     if request.method == 'POST':
-        #joke_id = request.form['JokeID']
-        #check if JokeID autoincrements
-        joke = request.form['JokeText']
-        opt_punchline = request.form['JokeTextLine2']
+        joke_id = None
+        if 'JokeID' in request.json:
+            joke_id = request.json['JokeID']
+            joke = query_db('select * from EelJokes where JokeID = ?', [joke_id], one=True)
+            if joke:
+                return jsonify(success=False)
+        joke_text = request.json['JokeText']
+        opt_punchline = request.json['JokeTextLine2']
 
         db.execute('INSERT into EelJokes (JokeID, JokeText, JokeTextLine2)'
-                    ' VALUES (NULL, ?, ?)', (joke, opt_punchline)
+                    ' VALUES (?, ?, ?)', (joke_id, joke_text, opt_punchline)
         )
         db.commit()
-        return redirect('/')
+        return jsonify(success=True)
         
     all_jokes = {}
     for joke in query_db('select * from EelJokes'):
@@ -40,10 +44,14 @@ def jokes():
 # view/endpoint for deleting a joke
 @bp.route('/delete/<int:id>')
 def delete(id):
+    joke = query_db('select * from EelJokes where JokeID = ?', [id], one=True)
+    if not joke:
+         abort(404)
+
     db = get_db()
     db.execute('DELETE FROM EelJokes WHERE JokeID = ?', (id,))
     db.commit()
-    return redirect('/')
+    return jsonify(success=True)
 
 # view/endpoint for viewing a single or updating a joke
 @bp.route('/<int:id>', methods = ['POST', 'GET'])
@@ -51,8 +59,8 @@ def update(id):
     db = get_db()
     # updating
     if request.method == 'POST':
-        joke = request.form['JokeText']
-        opt_punchline = request.form['JokeTextLine2']
+        joke = request.json['JokeText']
+        opt_punchline = request.json['JokeTextLine2']
 
         db.execute(
             'UPDATE EelJokes SET JokeText = ?, JokeTextLine2 = ?'
@@ -60,7 +68,7 @@ def update(id):
             (joke, opt_punchline, id)
         )
         db.commit()
-        return redirect('/')
+        return jsonify(success=True)
     #viewing
     joke = get_joke(id)
 
@@ -76,7 +84,7 @@ def get_joke(id):
     [id], one=True)
 
     if joke is None:
-        abort(404, "Joke id {0} doesn't exist.".format(id))
+        return abort(404)
 
     return joke
     
