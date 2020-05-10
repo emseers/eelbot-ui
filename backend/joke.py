@@ -18,20 +18,20 @@ def jokes():
         joke_id = None
         if 'JokeID' in request.json:
             joke_id = request.json['JokeID']
-            joke = query_db('select * from EelJokes where JokeID = ?', [joke_id], one=True)
+            joke = query_db('select * from EelJoke where JokeID = ?', [joke_id], one=True)
             if joke:
                 return jsonify(success=False)
         joke_text = request.json['JokeText']
         opt_punchline = request.json['JokeTextLine2']
 
-        db.execute('INSERT into EelJokes (JokeID, JokeText, JokeTextLine2)'
+        db.execute('INSERT into EelJoke (JokeID, JokeText, JokeTextLine2)'
                     ' VALUES (?, ?, ?)', (joke_id, joke_text, opt_punchline)
         )
         db.commit()
         return jsonify(success=True)
         
     all_jokes = {}
-    for joke in query_db('select * from EelJokes'):
+    for joke in query_db('select * from EelJoke'):
         joke_obj = {'JokeID' : None, 'JokeText' : None, 'JokeTextLine2' : None}
         joke_obj['JokeID'] = joke['JokeID']
         joke_obj['JokeText'] = joke['JokeText']
@@ -49,7 +49,7 @@ def delete(id):
          abort(404)
 
     db = get_db()
-    db.execute('DELETE FROM EelJokes WHERE JokeID = ?', (id,))
+    db.execute('DELETE FROM EelJoke WHERE JokeID = ?', (id,))
     db.commit()
     return jsonify(success=True)
 
@@ -63,7 +63,7 @@ def update(id):
         opt_punchline = request.json['JokeTextLine2']
 
         db.execute(
-            'UPDATE EelJokes SET JokeText = ?, JokeTextLine2 = ?'
+            'UPDATE EelJoke SET JokeText = ?, JokeTextLine2 = ?'
             ' WHERE JokeID = ?',
             (joke, opt_punchline, id)
         )
@@ -80,7 +80,7 @@ def update(id):
 
     
 def get_joke(id):
-    joke = query_db('select * from EelJokes where JokeID = ?',
+    joke = query_db('select * from EelJoke where JokeID = ?',
     [id], one=True)
 
     if joke is None:
