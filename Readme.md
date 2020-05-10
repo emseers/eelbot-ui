@@ -21,9 +21,18 @@ Implemented as a RESTful API powered by flask and a React based SPA.
 
         pipenv install
 
-5. When running the server for the first time, use command
+5. Run virtual environment by using the command
+
+        pipenv shell
+
+6.  cd .. to Eelbot-ui, then run commands to start the server
+
+        export FLASK_APP=backend
+        export FLASK_ENV=development
+        flask run
+
+7. When running the server for the first time, use command
 
         flask init-db
 
-6. Replace the db with your own eelbotdb in the instance directory after it's been created
-(replace step-5 and 6 with a more viable solution later)
+8. Replace the db with your own eelbotdb in the instance directory after it's been created
