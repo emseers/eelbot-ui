@@ -3,7 +3,7 @@ import functools
 from flask import (
     Blueprint, flash, g, request, session, url_for, jsonify, abort
 )
-
+from . import my_utils
 from backend.db import get_db, query_db
 
 # this is the joke blueprint, define endpoints for jokes here
@@ -39,7 +39,7 @@ def jokes():
 
         all_jokes[joke['JokeID']] = joke_obj
 
-    return jsonify(all_jokes)
+    return my_utils.package_response(all_jokes)
 
 # view/endpoint for deleting a joke
 @bp.route('/delete/<int:id>')
@@ -76,7 +76,7 @@ def update(id):
     joke_obj['JokeID'] = joke['JokeID']
     joke_obj['JokeText'] = joke['JokeText']
     joke_obj['JokeTextLine2'] = joke['JokeTextLine2']
-    return jsonify(joke_obj)
+    return my_utils.package_response(joke_obj)
 
     
 def get_joke(id):
