@@ -1,0 +1,1 @@
+from .jokes.blueprint import bp as jokes_bp
