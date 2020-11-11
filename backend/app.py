@@ -6,7 +6,10 @@ class App:
     app = None
 
     def __init__(self):
+        from utils.myclass import db
         self.app = Flask(__name__)
+        self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///EelbotDB.db'
+        db.init_app(self.app)
 
     @abstractmethod
     def configure_app(self):
