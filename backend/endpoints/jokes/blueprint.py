@@ -12,34 +12,38 @@ bp = Blueprint(
 # def main():
 #     return make_response(("Hello Eels!", 200))
 
-@bp.route("/", methods=['POST'])
+@bp.route("/", methods=['POST', 'GET'])
 def create():
-    json_data = request.json
-    new_task = EelJokes(JokeText=json_data[0], JokeTextLine2=json_data[1])
+    if request.method == 'POST':
+        json_data = request.json
+        new_task = EelJokes(JokeText=json_data[0], JokeTextLine2=json_data[1])
 
-    try:
-        db.session.add(new_task)
-        db.session.commit()
-        return "Joke added successfully"
-    except:
-        return "There was an issue adding your joke"
-    pass
+        try:
+            db.session.add(new_task)
+            db.session.commit()
+            return "Joke added successfully"
+        except:
+            return "There was an issue adding your joke"
+        pass
+    else:
+        num_jokes_per_page = int(request.args.get('num_jokes_per_page'))
+        page = int(request.args.get('page'))
 
-@bp.route("/<int:num_jokes_per_page>/page/", methods=['GET'])
-def pagenum(num_jokes_per_page):
+        offset = (page - 1) * num_jokes_per_page
+        tasks = EelJokes.query.order_by(EelJokes.JokeID).limit(num_jokes_per_page).offset(offset)
+        return_jokes = []
+        for task in tasks:
+            return_jokes.append(task.get_joke_data())
+        return json.dumps(return_jokes)
+
+@bp.route("/page/", methods=['GET'])
+def pagenum():
+    num_jokes_per_page = int(request.args.get('num_jokes_per_page'))
+
     import math
     rows = EelJokes.query.count()
     num_pages = math.ceil(rows/num_jokes_per_page)
     return str(num_pages)
-
-@bp.route("/<int:num_jokes_per_page>/page/<int:page>", methods=['GET'])
-def readpage(num_jokes_per_page, page):
-    offset = (page-1) * num_jokes_per_page
-    tasks = EelJokes.query.order_by(EelJokes.JokeID).limit(num_jokes_per_page).offset(offset)
-    return_jokes = []
-    for task in tasks:
-        return_jokes.append(task.get_joke_data())
-    return json.dumps(return_jokes)
 
 @bp.route("/<int:id>", methods=['GET', 'PUT', 'DELETE'])
 def modify(id):
