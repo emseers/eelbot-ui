@@ -42,28 +42,31 @@ def pagenum():
     num_pages = math.ceil(rows/num_jokes_per_page)
     return str(num_pages)
 
-@bp.route("/<int:id>", methods=['GET', 'PUT', 'DELETE'])
-def modify(id):
-    if request.method == 'GET':
-        joke_to_return = EelJokes.query.get_or_404(id)
-        return json.dumps(joke_to_return.get_joke_data())
-    elif request.method == 'PUT':
-        joke_to_update = EelJokes.query.get_or_404(id)
-        json_data = request.json
-        joke_to_update.JokeText = json_data[0]
-        joke_to_update.JokeTextLine2 = json_data[1]
+@bp.route("/<int:id>", methods=['GET'])
+def get_joke(id):
+    joke_to_return = EelJokes.query.get_or_404(id)
+    return json.dumps(joke_to_return.get_joke_data())
 
-        try:
-            db.session.commit()
-            return "Joke updated successfully"
-        except:
-            return "There was an issue updating your joke"
-    else:
-        joke_to_delete = EelJokes.query.get_or_404(id)
+@bp.route("/<int:id>", methods=['PUT'])
+def update_joke(id):
+    joke_to_update = EelJokes.query.get_or_404(id)
+    json_data = request.json
+    joke_to_update.JokeText = json_data[0]
+    joke_to_update.JokeTextLine2 = json_data[1]
 
-        try:
-            db.session.delete(joke_to_delete)
-            db.session.commit()
-            return "Joke deleted successfully"
-        except:
-            return "There was a problem deleting that joke"
+    try:
+        db.session.commit()
+        return "Joke updated successfully"
+    except:
+        return "There was an issue updating your joke"
+
+@bp.route("/<int:id>", methods=['DELETE'])
+def delete_joke(id):
+    joke_to_delete = EelJokes.query.get_or_404(id)
+
+    try:
+        db.session.delete(joke_to_delete)
+        db.session.commit()
+        return "Joke deleted successfully"
+    except:
+        return "There was a problem deleting that joke"
