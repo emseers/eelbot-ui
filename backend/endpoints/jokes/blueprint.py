@@ -8,33 +8,30 @@ bp = Blueprint(
     url_prefix="/joke",
 )
 
-# @bp.route("/")
-# def main():
-#     return make_response(("Hello Eels!", 200))
 
-@bp.route("/", methods=['POST', 'GET'])
-def create():
-    if request.method == 'POST':
-        json_data = request.json
-        new_task = EelJokes(JokeText=json_data[0], JokeTextLine2=json_data[1])
+@bp.route("/", methods=['POST'])
+def create_joke():
+    json_data = request.json
+    new_task = EelJokes(JokeText=json_data[0], JokeTextLine2=json_data[1])
 
-        try:
-            db.session.add(new_task)
-            db.session.commit()
-            return "Joke added successfully"
-        except:
-            return "There was an issue adding your joke"
-        pass
-    else:
-        num_jokes_per_page = int(request.args.get('num_jokes_per_page'))
-        page = int(request.args.get('page'))
+    try:
+        db.session.add(new_task)
+        db.session.commit()
+        return "Joke added successfully"
+    except:
+        return "There was an issue adding your joke"
 
-        offset = (page - 1) * num_jokes_per_page
-        tasks = EelJokes.query.order_by(EelJokes.JokeID).limit(num_jokes_per_page).offset(offset)
-        return_jokes = []
-        for task in tasks:
-            return_jokes.append(task.get_joke_data())
-        return json.dumps(return_jokes)
+@bp.route("/", methods=['GET'])
+def get_jokes():
+    num_jokes_per_page = int(request.args.get('num_jokes_per_page'))
+    page = int(request.args.get('page'))
+
+    offset = (page - 1) * num_jokes_per_page
+    tasks = EelJokes.query.order_by(EelJokes.JokeID).limit(num_jokes_per_page).offset(offset)
+    return_jokes = []
+    for task in tasks:
+        return_jokes.append(task.get_joke_data())
+    return json.dumps(return_jokes)
 
 @bp.route("/page/", methods=['GET'])
 def pagenum():
