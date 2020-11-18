@@ -1,5 +1,5 @@
 from flask import Blueprint, make_response, request
-from utils.myclass import EelJokes, db
+from utils.eeljokes import EelJokes, db
 import json
 
 bp = Blueprint(
