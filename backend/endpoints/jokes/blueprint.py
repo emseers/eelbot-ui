@@ -8,7 +8,6 @@ bp = Blueprint(
     url_prefix="/joke",
 )
 
-
 @bp.route("/", methods=['POST'])
 def create_joke():
     json_data = request.json
@@ -56,7 +55,7 @@ def update_joke(id):
 
     try:
         db.session.commit()
-        return "Joke updated successfully"
+        return json.dumps(joke_to_update.get_joke_data())
     except:
         return "There was an issue updating your joke"
 
