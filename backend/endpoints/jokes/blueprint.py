@@ -12,10 +12,10 @@ bp = Blueprint(
 @bp.route("/", methods=['POST'])
 def create_joke():
     json_data = request.json
-    new_task = EelJokes(JokeText=json_data[0], JokeTextLine2=json_data[1])
+    new_joke = EelJokes(JokeText=json_data[0], JokeTextLine2=json_data[1])
 
     try:
-        db.session.add(new_task)
+        db.session.add(new_joke)
         db.session.commit()
         return "Joke added successfully"
     except:
