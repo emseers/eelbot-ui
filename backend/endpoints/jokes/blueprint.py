@@ -1,6 +1,7 @@
 from flask import Blueprint, make_response, request
 from utils.eeljokes import EelJokes, db
 import json
+import math
 
 bp = Blueprint(
     "eelbot_joke",
@@ -36,7 +37,6 @@ def get_jokes():
 def pagenum():
     num_jokes_per_page = int(request.args.get('num_jokes_per_page'))
 
-    import math
     rows = EelJokes.query.count()
     num_pages = math.ceil(rows/num_jokes_per_page)
     return str(num_pages)

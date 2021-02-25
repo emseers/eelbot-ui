@@ -1,12 +1,14 @@
 from flask import Flask
 from flask_cors import CORS
 from abc import abstractmethod
+from utils.eeljokes import db
+from endpoints import jokes_bp
+import waitress
 
 class App:
     app = None
 
     def __init__(self):
-        from utils.eeljokes import db
         self.app = Flask(__name__)
         self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///EelbotDB.db'
         db.init_app(self.app)
@@ -16,7 +18,6 @@ class App:
         CORS(self.app)
 
     def register_app(self):
-        from endpoints import jokes_bp
         self.app.register_blueprint(jokes_bp)
 
     @abstractmethod
@@ -50,5 +51,4 @@ class ProdApp(App):
         self.port = "1338" # TODO: Replace with reading from config
 
     def serve(self):
-        import waitress
         waitress.serve(self.app, host=self.host, port=self.port)
