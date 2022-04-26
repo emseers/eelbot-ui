@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -51,26 +51,26 @@ class MainDrawer extends Component {
                     <Typography sx={{ ...styles.title }}>Eelbot Config 🌊</Typography>
                     <Divider/>
                     <List>
-                        <ListItem button key={'Jokes'}>
+                        <ListItemButton key={'Jokes'}>
                             <ListItemIcon>
                                 <TheaterComedyIcon/>
                             </ListItemIcon>
                             <ListItemText primary='Jokes' />
-                        </ListItem>
+                        </ListItemButton>
 
-                        <ListItem button key='Images'>
+                        <ListItemButton key='Images'>
                             <ListItemIcon>
                                 <ImageIcon/>
                             </ListItemIcon>
                             <ListItemText primary='Images' />
-                        </ListItem>
+                        </ListItemButton>
 
-                        <ListItem button key='Taunts'>
+                        <ListItemButton key='Taunts'>
                             <ListItemIcon>
                                 <VolumeUpIcon/>
                             </ListItemIcon>
                             <ListItemText primary='Taunts' />
-                        </ListItem>
+                        </ListItemButton>
                     </List>
                 </Box>
             </Drawer>
