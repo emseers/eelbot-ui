@@ -8,8 +8,6 @@ class SearchBar extends Component {
     }
 
     render() {
-        const { classes } = this.props;
-
         return (
             <Box sx={{ ...styles.box }}>
                 <TextField sx={{ ...styles.text }} onChange={this._handleChange} id="outlined-basic" label="Search..." variant="outlined" />

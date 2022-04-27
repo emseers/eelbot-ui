@@ -7,12 +7,9 @@ import SearchBar from './SearchBar'
 class ItemSearchCard extends Component {
     constructor(props) {
         super(props);
-        //this.state = { inStock: false, value: "" };
     }
 
     render() {
-        const { classes } = this.props;
-
         return (
             <Card>
                 <CardHeader

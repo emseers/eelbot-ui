@@ -9,8 +9,6 @@ class MainContent extends Component {
     }
 
     render() {
-        const { classes } = this.props;
-
         const testItem = {
             "id": "123",
             "type": "joke",
