@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ItemCard from "./ItemCard"
+import JokeCard from "./JokeCard"
 import Grid from '@mui/material/Grid';
 import ItemSearchCard from './ItemSearchCard';
 
@@ -9,10 +9,11 @@ class MainContent extends Component {
     }
 
     render() {
-        const testItem = {
+        // sample response from jokes endpoint
+        const testJoke = {
             "id": "123",
-            "type": "joke",
-            "payload": { 'leadup': 'Why did the chicken cross the road?', 'punchline': 'To get to the other side' },
+            'leadup': 'Why did the chicken cross the road?',
+            'punchline': 'To get to the other side',
         }
 
         return (
@@ -21,28 +22,31 @@ class MainContent extends Component {
                     <ItemSearchCard />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload} />
+                    <JokeCard id={testJoke.id} leadup={testJoke.leadup} punchline={testJoke.punchline} />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload} />
+                    <JokeCard id={testJoke.id} leadup={testJoke.leadup} punchline={testJoke.punchline} />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload} />
+                    <JokeCard id={testJoke.id} leadup={testJoke.leadup} punchline={testJoke.punchline} />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload} />
+                    <JokeCard id={testJoke.id} leadup={testJoke.leadup} punchline={testJoke.punchline} />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload} />
+                    <JokeCard id={testJoke.id} leadup={testJoke.leadup} punchline={testJoke.punchline} />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload} />
+                    <JokeCard id={testJoke.id} leadup={testJoke.leadup} punchline={testJoke.punchline} />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload} />
+                    <JokeCard id={testJoke.id} leadup={testJoke.leadup} punchline={testJoke.punchline} />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload} />
+                    <JokeCard id={testJoke.id} leadup={testJoke.leadup} punchline={testJoke.punchline} />
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                    <JokeCard id={testJoke.id} leadup={testJoke.leadup} punchline={testJoke.punchline} />
                 </Grid>
             </Grid>
         );
