@@ -17,7 +17,7 @@ class ItemSearchCard extends Component {
                 />
                 <Divider variant="middle" />
                 <CardContent>
-                    <SearchBar/>
+                    <SearchBar />
                 </CardContent>
             </Card>
         );

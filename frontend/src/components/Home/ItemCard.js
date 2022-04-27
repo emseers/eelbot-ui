@@ -35,7 +35,7 @@ class ItemCard extends Component {
                     title={type + '#' + id}
                 />
                 <CardContent>
-                   {this._resolveItemType(type, payload)}
+                    {this._resolveItemType(type, payload)}
                 </CardContent>
                 <CardActions>
                     <Grid container>
@@ -52,7 +52,7 @@ class ItemCard extends Component {
     }
 }
 
-const styles= {
+const styles = {
     title: {
         fontSize: 14,
     },

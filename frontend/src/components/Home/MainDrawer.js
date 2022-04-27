@@ -32,54 +32,54 @@ class MainDrawer extends Component {
     render() {
         return (
             <div>
-            <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-            onClick={this._handleClickOpen}
-          >
-            <MenuIcon />
-          </IconButton>
-            <Drawer
-            anchor='left'
-            open={this.state.open}
-            onClose={this._handleClose}
-            >
-                <Box sx={{ width: 250 }}>
-                    <Typography sx={{ ...styles.title }}>Eelbot Config 🌊</Typography>
-                    <Divider/>
-                    <List>
-                        <ListItemButton key={'Jokes'}>
-                            <ListItemIcon>
-                                <TheaterComedyIcon/>
-                            </ListItemIcon>
-                            <ListItemText primary='Jokes' />
-                        </ListItemButton>
+                <IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ mr: 2 }}
+                    onClick={this._handleClickOpen}
+                >
+                    <MenuIcon />
+                </IconButton>
+                <Drawer
+                    anchor='left'
+                    open={this.state.open}
+                    onClose={this._handleClose}
+                >
+                    <Box sx={{ width: 250 }}>
+                        <Typography sx={{ ...styles.title }}>Eelbot Config 🌊</Typography>
+                        <Divider />
+                        <List>
+                            <ListItemButton key={'Jokes'}>
+                                <ListItemIcon>
+                                    <TheaterComedyIcon />
+                                </ListItemIcon>
+                                <ListItemText primary='Jokes' />
+                            </ListItemButton>
 
-                        <ListItemButton key='Images'>
-                            <ListItemIcon>
-                                <ImageIcon/>
-                            </ListItemIcon>
-                            <ListItemText primary='Images' />
-                        </ListItemButton>
+                            <ListItemButton key='Images'>
+                                <ListItemIcon>
+                                    <ImageIcon />
+                                </ListItemIcon>
+                                <ListItemText primary='Images' />
+                            </ListItemButton>
 
-                        <ListItemButton key='Taunts'>
-                            <ListItemIcon>
-                                <VolumeUpIcon/>
-                            </ListItemIcon>
-                            <ListItemText primary='Taunts' />
-                        </ListItemButton>
-                    </List>
-                </Box>
-            </Drawer>
+                            <ListItemButton key='Taunts'>
+                                <ListItemIcon>
+                                    <VolumeUpIcon />
+                                </ListItemIcon>
+                                <ListItemText primary='Taunts' />
+                            </ListItemButton>
+                        </List>
+                    </Box>
+                </Drawer>
             </div>
         )
-    }   
+    }
 }
 
-const styles= {
+const styles = {
     title: {
         fontSize: 22,
         p: 1,

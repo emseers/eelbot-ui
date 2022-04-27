@@ -15,13 +15,13 @@ class Home extends Component {
     render() {
         return (
             <Grid container direction="column" spacing={2}>
-                <Grid item><MainHeader/></Grid>
+                <Grid item><MainHeader /></Grid>
                 <Grid item container>
-                    <Grid item xs={false} sm={2}/>
+                    <Grid item xs={false} sm={2} />
                     <Grid item xs={12} sm={8}>
-                        <MainContent/>
+                        <MainContent />
                     </Grid>
-                    <Grid item xs={false} sm={2}/>
+                    <Grid item xs={false} sm={2} />
                 </Grid>
             </Grid>
         )

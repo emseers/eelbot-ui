@@ -12,7 +12,7 @@ export default function ButtonAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          
+
           <MainDrawer></MainDrawer>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Eelbot Database

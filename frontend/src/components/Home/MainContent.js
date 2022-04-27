@@ -12,37 +12,37 @@ class MainContent extends Component {
         const testItem = {
             "id": "123",
             "type": "joke",
-            "payload": { 'leadup': 'Why did the chicken cross the road?', 'punchline': 'To get to the other side'},
+            "payload": { 'leadup': 'Why did the chicken cross the road?', 'punchline': 'To get to the other side' },
         }
 
         return (
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <ItemSearchCard/>
+                    <ItemSearchCard />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload}/>
+                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload} />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload}/>
+                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload} />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload}/>
+                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload} />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload}/>
+                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload} />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload}/>
+                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload} />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload}/>
+                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload} />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload}/>
+                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload} />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload}/>
+                    <ItemCard id={testItem.id} type={testItem.type} payload={testItem.payload} />
                 </Grid>
             </Grid>
         );
