@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import theme from './theme.js';
 import { ThemeProvider } from '@mui/material/styles';
