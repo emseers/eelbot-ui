@@ -15,7 +15,7 @@ class MainContent extends Component {
         return this.props.jokes.map(joke => {
             return (
                 <Grid item xs={12} sm={4} key={joke.id}>
-                    <JokeCard id={joke.JokeID} leadup={joke.JokeText} punchline={joke.JokeTextLine2} />
+                    <JokeCard id={joke.JokeID} leadup={joke.JokeText} punchline={joke.JokeTextLine2} onDelete={this._handleDeleteJoke} onEdit={this._handleEditJoke} />
                 </Grid>
             );
         })
@@ -24,6 +24,14 @@ class MainContent extends Component {
     _handleLoadMore = () => {
         this.props.onLoadMore();
     };
+
+    _handleDeleteJoke = (id) => {
+        this.props.onDeleteJoke(id);
+    }
+
+    _handleEditJoke = (joke) => {
+        this.props.onEditJoke(joke);
+    }
 
     render() {
         // sample response from jokes endpoint
