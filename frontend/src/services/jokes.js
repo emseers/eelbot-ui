@@ -24,7 +24,7 @@ const create = async (joke) => {
     const settings = {
         method: 'POST',
         headers: {
-            Accept: 'application/json',
+            'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(joke)
@@ -39,7 +39,7 @@ const put = async (id, joke) => {
     const settings = {
         method: 'PUT',
         headers: {
-            Accept: 'application/json',
+            'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(joke)
