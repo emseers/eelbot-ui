@@ -66,6 +66,7 @@ class EditJokeDialog extends Component {
                             type="leadup"
                             fullWidth
                             variant="standard"
+                            defaultValue={this.props.leadup}
                             onChange={this._handleLeadUpChange}
                         />
                         <TextField
@@ -76,6 +77,7 @@ class EditJokeDialog extends Component {
                             type="punchline"
                             fullWidth
                             variant="standard"
+                            defaultValue={this.props.punchline}
                             onChange={this._handlePunchLineChange}
                         />
                     </DialogContent>

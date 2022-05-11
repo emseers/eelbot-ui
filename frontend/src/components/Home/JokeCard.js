@@ -26,7 +26,7 @@ class JokeCard extends Component {
                 <CardHeader
                     title={'Joke#' + id}
                 />
-                <CardContent>
+                <CardContent sx={{ ...styles.card }}>
                     <Typography sx={{ ...styles.title }} color="textSecondary" gutterBottom>
                         {leadup}
                     </Typography>
@@ -52,6 +52,12 @@ class JokeCard extends Component {
 const styles = {
     title: {
         fontSize: 14,
+        textOverflow: "ellipsis",
+    },
+    card: {
+        height: 100,
+        overflow: "hidden",
+        textOverflow: "ellipsis",
     }
 };
 
