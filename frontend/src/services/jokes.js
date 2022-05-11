@@ -1,26 +1,13 @@
 const getPage = async (numJokesPerPage, page) => {
     const response = await fetch(`/joke/?num_jokes_per_page=${numJokesPerPage}&page=${page}`);
-
-    if (!response.ok) {
-        const message = `An error has occured: ${response.status}`;
-        throw new Error(message);
-    }
-
-    const body = await response.json();
-    console.log(body)
-    return body;
+    if (!response.ok) throw new Error(`An error has occured: ${response.status}`);
+    return response.json();
 };
 
 const get = async (id) => {
     const response = await fetch(`/joke/${id}`);
-
-    if (!response.ok) {
-        const message = `An error has occured: ${response.status}`;
-        throw new Error(message);
-    }
-
-    const joke = await response.json();
-    return joke;
+    if (!response.ok) throw new Error(`An error has occured: ${response.status}`);
+    return response.json();
 };
 
 const del = async (id) => {
@@ -29,14 +16,8 @@ const del = async (id) => {
     }
 
     const response = await fetch(`/joke/${id}`, settings);
-
-    if (!response.ok) {
-        const message = `An error has occured: ${response.status}`;
-        throw new Error(message);
-    }
-
-    const success = await response.ok;
-    return success;
+    if (!response.ok) throw new Error(`An error has occured: ${response.status}`);
+    return response.ok;
 };
 
 const create = async (joke) => {
@@ -50,14 +31,8 @@ const create = async (joke) => {
     };
     
     const response = await fetch('/joke', settings);
-
-    if (!response.ok) {
-        const message = `An error has occured: ${response.status}`;
-        throw new Error(message);
-    };
-
-    const success = await response.ok;
-    return success;
+    if (!response.ok) throw new Error(`An error has occured: ${response.status}`);
+    return response.ok;
 };
 
 const put = async (id, joke) => {
@@ -71,14 +46,8 @@ const put = async (id, joke) => {
     };
     
     const response = await fetch(`/joke/${id}`, settings);
-
-    if (!response.ok) {
-        const message = `An error has occured: ${response.status}`;
-        throw new Error(message);
-    };
-
-    const success = await response.ok;
-    return success;
+    if (!response.ok) throw new Error(`An error has occured: ${response.status}`);
+    return response.ok;
 };
 
 export default {
