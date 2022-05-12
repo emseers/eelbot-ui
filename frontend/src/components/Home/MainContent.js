@@ -14,7 +14,7 @@ class MainContent extends Component {
 
         return this.props.jokes.map(joke => {
             return (
-                <Grid item xs={12} sm={4} key={joke.id}>
+                <Grid item xs={12} sm={4} key={joke.JokeID}>
                     <JokeCard id={joke.JokeID} leadup={joke.JokeText} punchline={joke.JokeTextLine2} onDelete={this._handleDeleteJoke} onEdit={this._handleEditJoke} />
                 </Grid>
             );

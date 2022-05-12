@@ -13,41 +13,43 @@ class Home extends Component {
         this.state = { jokes: [], index: 1, loading: false };
     }
 
-    componentDidMount() {
-        JokeService.getPage(9, this.state.index).then((jokes) => { this.setState({ jokes: jokes }) });
+    async componentDidMount() {
+        const jokes = await JokeService.getPage(9, this.state.index);
+        this.setState({ jokes: jokes });
+        console.log(this.state.jokes)
     }
 
-    _reloadJokes = () => {
-        JokeService.getPage(9, 1).then((jokes) => { this.setState({ jokes: jokes }); this.setState({ index: 1 }); });
+    _reloadJokes = async () => {
+        const jokes = await JokeService.getPage(9, 1);
+        this.setState({ jokes: jokes });
+        this.setState({ index: 1 });
+
     }
 
-    _handleLoadMore = () => {
+    _handleLoadMore = async () => {
         this.setState({ loading: true }); // disables the button to prevent mutliple requests
-        JokeService.getPage(9, this.state.index + 1).then((jokes) => {
-            this.setState({ jokes: [...this.state.jokes, ...jokes] });
-            this.setState({ index: this.state.index + 1 });
-            this.setState({ loading: false }); // reenable the button after successful response
-        });
+
+        const newJokes = await JokeService.getPage(9, this.state.index + 1);
+        this.setState({ jokes: [...this.state.jokes, ...newJokes] });
+        this.setState({ index: this.state.index + 1 });
+        this.setState({ loading: false }); // reenable the button after successful response
     }
 
-    _handleDeleteJoke = (id) => {
-        JokeService.del(id).then((success) => { 
-            //this.setState({ jokes: this.state.jokes.filter(joke => { return joke.JokeID != id }) }); wait until api cursor is available
-            this._reloadJokes(); // for now just re-request jokes
-        });
+    _handleDeleteJoke = async (id) => {
+        await JokeService.del(id);
+        // TODO: reflect state with deleted joke (need api cursor for this)
+        this._reloadJokes();
     }
 
-    _handleCreateJoke = (joke) => {
-        JokeService.create([joke.JokeText, joke.JokeTextLine2]).then((success) => { 
-            //this.setState({ jokes: this.state.jokes.filter(joke => { return joke.JokeID != id }) }); wait until api cursor is available
-            this._reloadJokes(); // for now just re-request jokes
-        });
+    _handleCreateJoke = async (joke) => {
+        await JokeService.create([joke.JokeText, joke.JokeTextLine2]);
+        // TODO: reflect state with new joke (need api cursor for this)
+        this._reloadJokes();
     }
 
-    _handleEditJoke = (joke) => {
-        JokeService.put(joke.JokeID, [joke.JokeText, joke.JokeTextLine2]).then((success) => {
-            this._reloadJokes(); // for now just re-request jokes
-        });
+    _handleEditJoke = async (joke) => {
+        await JokeService.put(joke.JokeID, [joke.JokeText, joke.JokeTextLine2]);
+        this._reloadJokes();
     }
 
     render() {
