@@ -18,15 +18,17 @@ class Home extends Component {
     }
 
     _reloadJokes = async () => {
-        this.setState({ jokes:  await JokeService.getPage(9, 1), index: 1 });
+        this.setState({ jokes: await JokeService.getPage(9, 1), index: 1 });
     }
 
     _handleLoadMore = async () => {
         this.setState({ loading: true }); // disables the button to prevent mutliple requests
-        
-        this.setState({ jokes: [...this.state.jokes, ...await JokeService.getPage(9, this.state.index + 1)],
-                        index: this.state.index + 1,
-                        loading: false }); // reenable the button after successful response
+
+        this.setState({
+            jokes: [...this.state.jokes, ...await JokeService.getPage(9, this.state.index + 1)],
+            index: this.state.index + 1,
+            loading: false
+        }); // reenable the button after successful response
     }
 
     _handleDeleteJoke = async (id) => {
@@ -49,11 +51,11 @@ class Home extends Component {
     render() {
         return (
             <Grid container direction="column" spacing={2}>
-                <Grid item><MainHeader onCreateJoke={this._handleCreateJoke}/></Grid>
+                <Grid item><MainHeader onCreateJoke={this._handleCreateJoke} /></Grid>
                 <Grid item container>
                     <Grid item xs={false} sm={2} />
                     <Grid item xs={12} sm={8}>
-                        <MainContent jokes={this.state.jokes} onLoadMore={this._handleLoadMore} loading={this.state.loading} onDeleteJoke={this._handleDeleteJoke} onEditJoke={this._handleEditJoke}/>
+                        <MainContent jokes={this.state.jokes} onLoadMore={this._handleLoadMore} loading={this.state.loading} onDeleteJoke={this._handleDeleteJoke} onEditJoke={this._handleEditJoke} />
                     </Grid>
                     <Grid item xs={false} sm={2} />
                 </Grid>
