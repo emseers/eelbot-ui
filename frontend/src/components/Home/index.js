@@ -14,25 +14,19 @@ class Home extends Component {
     }
 
     async componentDidMount() {
-        const jokes = await JokeService.getPage(9, this.state.index);
-        this.setState({ jokes: jokes });
-        console.log(this.state.jokes)
+        this.setState({ jokes: await JokeService.getPage(9, this.state.index) });
     }
 
     _reloadJokes = async () => {
-        const jokes = await JokeService.getPage(9, 1);
-        this.setState({ jokes: jokes });
-        this.setState({ index: 1 });
-
+        this.setState({ jokes:  await JokeService.getPage(9, 1), index: 1 });
     }
 
     _handleLoadMore = async () => {
         this.setState({ loading: true }); // disables the button to prevent mutliple requests
-
-        const newJokes = await JokeService.getPage(9, this.state.index + 1);
-        this.setState({ jokes: [...this.state.jokes, ...newJokes] });
-        this.setState({ index: this.state.index + 1 });
-        this.setState({ loading: false }); // reenable the button after successful response
+        
+        this.setState({ jokes: [...this.state.jokes, ...await JokeService.getPage(9, this.state.index + 1)],
+                        index: this.state.index + 1,
+                        loading: false }); // reenable the button after successful response
     }
 
     _handleDeleteJoke = async (id) => {
