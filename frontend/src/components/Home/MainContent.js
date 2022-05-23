@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import JokeCard from "./JokeCard"
 import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
 import ItemSearchCard from './ItemSearchCard';
 
 class MainContent extends Component {
@@ -8,45 +9,40 @@ class MainContent extends Component {
         super(props);
     }
 
+    _createJokeCards() {
+        if (!this.props.jokes) return null;
+
+        return this.props.jokes.map(joke => {
+            return (
+                <Grid item xs={12} sm={4} key={joke.JokeID}>
+                    <JokeCard id={joke.JokeID} leadup={joke.JokeText} punchline={joke.JokeTextLine2} onDelete={this._handleDeleteJoke} onEdit={this._handleEditJoke} />
+                </Grid>
+            );
+        })
+    }
+
+    _handleLoadMore = () => {
+        this.props.onLoadMore();
+    };
+
+    _handleDeleteJoke = (id) => {
+        this.props.onDeleteJoke(id);
+    }
+
+    _handleEditJoke = (joke) => {
+        this.props.onEditJoke(joke);
+    }
+
     render() {
-        // sample response from jokes endpoint
-        const testJoke = {
-            "id": "123",
-            'leadup': 'Why did the chicken cross the road?',
-            'punchline': 'To get to the other side',
-        }
 
         return (
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <ItemSearchCard />
                 </Grid>
-                <Grid item xs={12} sm={4}>
-                    <JokeCard id={testJoke.id} leadup={testJoke.leadup} punchline={testJoke.punchline} />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    <JokeCard id={testJoke.id} leadup={testJoke.leadup} punchline={testJoke.punchline} />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    <JokeCard id={testJoke.id} leadup={testJoke.leadup} punchline={testJoke.punchline} />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    <JokeCard id={testJoke.id} leadup={testJoke.leadup} punchline={testJoke.punchline} />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    <JokeCard id={testJoke.id} leadup={testJoke.leadup} punchline={testJoke.punchline} />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    <JokeCard id={testJoke.id} leadup={testJoke.leadup} punchline={testJoke.punchline} />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    <JokeCard id={testJoke.id} leadup={testJoke.leadup} punchline={testJoke.punchline} />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    <JokeCard id={testJoke.id} leadup={testJoke.leadup} punchline={testJoke.punchline} />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    <JokeCard id={testJoke.id} leadup={testJoke.leadup} punchline={testJoke.punchline} />
+                {this._createJokeCards()}
+                <Grid item xs={12}>
+                    <Button color="secondary" onClick={this._handleLoadMore} disabled={this.props.loading}>Load More</Button>
                 </Grid>
             </Grid>
         );

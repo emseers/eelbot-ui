@@ -2,24 +2,60 @@ import React, { Component } from "react";
 import MainHeader from "./MainHeader";
 import MainContent from "./MainContent"
 import Grid from '@mui/material/Grid';
+import JokeService from "../../services/jokes";
 
 class Home extends Component {
 
-    static initialState = { items: [] };
+    static initialState = { jokes: [], index: 1, loading: false };
 
     constructor(props) {
         super(props);
-        this.state = { items: [] };
+        this.state = { jokes: [], index: 1, loading: false };
+    }
+
+    async componentDidMount() {
+        this.setState({ jokes: await JokeService.getPage(9, this.state.index) });
+    }
+
+    _reloadJokes = async () => {
+        this.setState({ jokes: await JokeService.getPage(9, 1), index: 1 });
+    }
+
+    _handleLoadMore = async () => {
+        this.setState({ loading: true }); // disables the button to prevent mutliple requests
+
+        this.setState({
+            jokes: [...this.state.jokes, ...await JokeService.getPage(9, this.state.index + 1)],
+            index: this.state.index + 1,
+            loading: false
+        }); // reenable the button after successful response
+    }
+
+    _handleDeleteJoke = async (id) => {
+        await JokeService.del(id);
+        // TODO: reflect state with deleted joke (need api cursor for this)
+        this._reloadJokes();
+    }
+
+    _handleCreateJoke = async (joke) => {
+        await JokeService.create([joke.JokeText, joke.JokeTextLine2]);
+        // TODO: reflect state with new joke (need api cursor for this)
+        this._reloadJokes();
+    }
+
+    _handleEditJoke = async (joke) => {
+        await JokeService.put(joke.JokeID, [joke.JokeText, joke.JokeTextLine2]);
+        this._reloadJokes();
     }
 
     render() {
         return (
             <Grid container direction="column" spacing={2}>
-                <Grid item><MainHeader /></Grid>
+                <Grid item><MainHeader onCreateJoke={this._handleCreateJoke} /></Grid>
                 <Grid item container>
                     <Grid item xs={false} sm={2} />
                     <Grid item xs={12} sm={8}>
-                        <MainContent />
+                        <MainContent jokes={this.state.jokes} onLoadMore={this._handleLoadMore} loading={this.state.loading} onDeleteJoke={this._handleDeleteJoke} onEditJoke={this._handleEditJoke} />
                     </Grid>
                     <Grid item xs={false} sm={2} />
                 </Grid>
