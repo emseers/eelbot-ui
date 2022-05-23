@@ -15,7 +15,7 @@ class EditJokeDialog extends Component {
             leadup: this.props.leadup,
             punchline: this.props.punchline,
         };
-    }
+    };
 
     _handleClickOpen = () => {
         this.setState({ open: true })
@@ -33,19 +33,19 @@ class EditJokeDialog extends Component {
         }
         this._handleClose();
         this.props.onEditJoke(joke);
-    }
+    };
 
     _handleLeadUpChange = (event) => {
         this.setState({
             leadup: event.target.value
         });
-    }
+    };
 
     _handlePunchLineChange = (event) => {
         this.setState({
             punchline: event.target.value
         });
-    }
+    };
 
     render() {
         return (
@@ -88,7 +88,7 @@ class EditJokeDialog extends Component {
                 </Dialog>
             </div>
         );
-    }
+    };
 };
 
-export default EditJokeDialog
+export default EditJokeDialog;

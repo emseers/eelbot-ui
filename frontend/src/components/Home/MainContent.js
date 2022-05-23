@@ -34,12 +34,6 @@ class MainContent extends Component {
     }
 
     render() {
-        // sample response from jokes endpoint
-        const testJoke = {
-            "id": "123",
-            'leadup': 'Why did the chicken cross the road?',
-            'punchline': 'To get to the other side',
-        }
 
         return (
             <Grid container spacing={2}>
