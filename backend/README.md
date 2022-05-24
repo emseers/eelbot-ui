@@ -1,7 +1,6 @@
 To set up:
-1. Set up a virtual environment.
-2. Activate the virtual environment.
-3. `pip install -r requirements.txt`
+1. install & resolve dependencies & create the virtual environment using the following command: `poetry install`
+3. To run the DEV version add the environment variable: `DEVEL = 'true'`.
 
-To run:
-1. `python __main__.py`
+To run the server within the virtual environment:
+1. `poetry run python __main__.py`
