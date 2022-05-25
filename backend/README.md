@@ -3,4 +3,4 @@ To set up:
 3. To run the DEV version add the environment variable: `DEVEL = 'true'`.
 
 To run the server within the virtual environment:
-1. `poetry run python __main__.py`
+1. `poetry run server`
