@@ -15,7 +15,7 @@ Flask-Cors = "3.0.9"
 pytest = "^5.2"
 
 [tool.poetry.scripts]
-server = "backend.__main__:main"
+server = "backend.__init__:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
