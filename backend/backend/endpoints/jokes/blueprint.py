@@ -1,5 +1,5 @@
 from flask import Blueprint, make_response, request
-from utils.eeljokes import EelJokes, db
+from backend.utils.eeljokes import EelJokes, db
 import json
 import math
 

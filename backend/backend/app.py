@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
 from abc import abstractmethod
-from utils.eeljokes import db
-from endpoints import jokes_bp
+from backend.utils.eeljokes import db
+from backend.endpoints import jokes_bp
 import waitress
 
 class App:
