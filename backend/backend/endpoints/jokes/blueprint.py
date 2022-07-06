@@ -12,8 +12,7 @@ bp = Blueprint(
 @bp.route("/", methods=['POST'])
 def create_joke():
     json_data = request.json
-    new_joke = EelJokes(JokeText=json_data[0], JokeTextLine2=json_data[1])
-
+    new_joke = EelJokes(text=json_data[0], punchline=json_data[1])
     try:
         db.session.add(new_joke)
         db.session.commit()
@@ -27,7 +26,7 @@ def get_jokes():
     page = int(request.args.get('page'))
 
     offset = (page - 1) * num_jokes_per_page
-    tasks = EelJokes.query.order_by(EelJokes.JokeID).limit(num_jokes_per_page).offset(offset)
+    tasks = EelJokes.query.order_by(EelJokes.id).limit(num_jokes_per_page).offset(offset)
     return_jokes = []
     for task in tasks:
         return_jokes.append(task.get_joke_data())
@@ -50,8 +49,8 @@ def get_joke(id):
 def update_joke(id):
     joke_to_update = EelJokes.query.get_or_404(id)
     json_data = request.json
-    joke_to_update.JokeText = json_data[0]
-    joke_to_update.JokeTextLine2 = json_data[1]
+    joke_to_update.text = json_data[0]
+    joke_to_update.punchline = json_data[1]
 
     try:
         db.session.commit()

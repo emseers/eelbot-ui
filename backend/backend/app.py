@@ -10,7 +10,7 @@ class App:
 
     def __init__(self):
         self.app = Flask(__name__)
-        self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///EelbotDB.db'
+        self.app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://eelbot:mysecretpassword@localhost:5432/eelbot" # TODO: Use environment variables instead
         db.init_app(self.app)
 
     @abstractmethod
