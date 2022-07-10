@@ -235,7 +235,7 @@ sqlcipher = ["sqlcipher3-binary"]
 
 [[package]]
 name = "waitress"
-version = "2.1.1"
+version = "2.1.2"
 description = "Waitress WSGI server"
 category = "main"
 optional = false
@@ -267,7 +267,7 @@ watchdog = ["watchdog"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "1b241fea43bceb60fc822b1bcf67498736bc4014a587a10abf2cf8b9ad7dd273"
+content-hash = "bdc3d6b30b66da606f1465fca6d8087c196dd3a4c6f0da1e37aa86529cd8e5e0"
 
 [metadata.files]
 atomicwrites = [
@@ -472,8 +472,8 @@ sqlalchemy = [
     {file = "SQLAlchemy-1.4.36.tar.gz", hash = "sha256:64678ac321d64a45901ef2e24725ec5e783f1f4a588305e196431447e7ace243"},
 ]
 waitress = [
-    {file = "waitress-2.1.1-py3-none-any.whl", hash = "sha256:c549f5b2b4afd44d9d97d7cec79f3ef581e25d832827f415dc175327af674aa8"},
-    {file = "waitress-2.1.1.tar.gz", hash = "sha256:e2e60576cf14a1539da79f7b7ee1e79a71e64f366a0b47db54a15e971f57bb16"},
+    {file = "waitress-2.1.2-py3-none-any.whl", hash = "sha256:7500c9625927c8ec60f54377d590f67b30c8e70ef4b8894214ac6e4cad233d2a"},
+    {file = "waitress-2.1.2.tar.gz", hash = "sha256:780a4082c5fbc0fde6a2fcfe5e26e6efc1e8f425730863c04085769781f51eba"},
 ]
 wcwidth = [
     {file = "wcwidth-0.2.5-py2.py3-none-any.whl", hash = "sha256:beb4802a9cebb9144e99086eff703a642a13d6a0052920003a230f3294bbe784"},
