@@ -1,11 +1,11 @@
 const getPage = async (numJokesPerPage, page) => {
-    const response = await fetch(`/joke/?num_jokes_per_page=${numJokesPerPage}&page=${page}`);
+    const response = await fetch(`/api/joke/?num_jokes_per_page=${numJokesPerPage}&page=${page}`);
     if (!response.ok) throw new Error(`An error has occured: ${response.status}`);
     return response.json();
 };
 
 const get = async (id) => {
-    const response = await fetch(`/joke/${id}`);
+    const response = await fetch(`/api/joke/${id}`);
     if (!response.ok) throw new Error(`An error has occured: ${response.status}`);
     return response.json();
 };
@@ -15,7 +15,7 @@ const del = async (id) => {
         method: 'DELETE',
     }
 
-    const response = await fetch(`/joke/${id}`, settings);
+    const response = await fetch(`/api/joke/${id}`, settings);
     if (!response.ok) throw new Error(`An error has occured: ${response.status}`);
     return response.ok;
 };
@@ -30,7 +30,7 @@ const create = async (joke) => {
         body: JSON.stringify(joke)
     };
     
-    const response = await fetch('/joke', settings);
+    const response = await fetch('/api/joke', settings);
     if (!response.ok) throw new Error(`An error has occured: ${response.status}`);
     return response.ok;
 };
@@ -45,7 +45,7 @@ const put = async (id, joke) => {
         body: JSON.stringify(joke)
     };
     
-    const response = await fetch(`/joke/${id}`, settings);
+    const response = await fetch(`/api/joke/${id}`, settings);
     if (!response.ok) throw new Error(`An error has occured: ${response.status}`);
     return response.ok;
 };

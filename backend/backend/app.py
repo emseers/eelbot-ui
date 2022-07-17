@@ -3,6 +3,9 @@ from flask_cors import CORS
 from abc import abstractmethod
 from backend.utils.eeljokes import db
 from backend.endpoints import jokes_bp
+
+from configmodule import Config, DevelopmentConfig, ProductionConfig
+
 import waitress
 
 class App:
@@ -10,8 +13,6 @@ class App:
 
     def __init__(self):
         self.app = Flask(__name__)
-        self.app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://eelbot:mysecretpassword@localhost:5432/eelbot" # TODO: Use environment variables instead
-        db.init_app(self.app)
 
     @abstractmethod
     def configure_app(self):
@@ -29,14 +30,14 @@ class DevApp(App):
         super().__init__()
         self.configure_app()
         self.register_app()
+        db.init_app(self.app)
 
     def configure_app(self):
         super().configure_app()
-        self.host = "0.0.0.0" # TODO: Replace with reading from config
-        self.port = "1337" # TODO: Replace with reading from config
+        self.app.config.from_object('configmodule.DevelopmentConfig')
 
     def serve(self):
-        self.app.run(host=self.host, port=self.port)
+        self.app.run(host=self.app.config['HOST'], port=self.app.config['PORT'])
 
 class ProdApp(App):
 
@@ -44,11 +45,11 @@ class ProdApp(App):
         super().__init__()
         self.configure_app()
         self.register_app()
+        db.init_app(self.app)
 
     def configure_app(self):
         super().configure_app()
-        self.host = "0.0.0.0" # TODO: Replace with reading from config
-        self.port = "1338" # TODO: Replace with reading from config
+        self.app.config.from_object('configmodule.ProductionConfig')
 
     def serve(self):
-        waitress.serve(self.app, host=self.host, port=self.port)
+        waitress.serve(self.app, host=self.app.config['HOST'], port=self.app.config['PORT'])
